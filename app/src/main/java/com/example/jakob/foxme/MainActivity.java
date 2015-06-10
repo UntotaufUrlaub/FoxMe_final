@@ -1,39 +1,65 @@
 package com.example.jakob.foxme;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
+import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.content.Context;
-import android.os.Build;
-import android.os.Bundle;
-import android.view.Gravity;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
+
+import com.example.jakob.foxme.Backend.Anzeige;
+import com.example.jakob.foxme.Backend.MainController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
-public class MainActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+//nice endlich mal
+/*
+    @Override
+    public void onNavigationDrawerItemSelected(int position) {
 
-    /**
+        Fragment fragment = null;
+
+        switch (position) {
+            case 0:
+                fragment = FirstFragment.newInstance(position + 1);
+                break;
+            case 1:
+                fragment = SecondFragment.newInstance(position + 1);
+                break;
+            case 2:
+                fragment = ThirdFragment.newInstance(position + 1);
+
+        }
+        FragmentManager frag..........
+*/
+
+public class MainActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks, FirstFragment.OnFragmentInteractionListener,
+        SecondFragment.OnFragmentInteractionListener, ThirdFragment.OnFragmentInteractionListener {
+    public static List<Anzeige> liste=new ArrayList();
+    /*
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
+
     /**
-     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
+     * +     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
+     * +
      */
     private CharSequence mTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        new MainController().execute("Select",null,null);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -50,9 +76,22 @@ public class MainActivity extends ActionBarActivity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
+        Fragment fragment = null;
+
+        switch (position) {
+            case 0:
+                fragment = FirstFragment.newInstance(position + 1);
+                break;
+            case 1:
+                fragment = SecondFragment.newInstance(position + 1);
+                break;
+            case 2:
+                fragment = ThirdFragment.newInstance(position + 1);
+
+        }
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                .replace(R.id.container, fragment) //TODO change every Placeholder
                 .commit();
     }
 
@@ -106,19 +145,30 @@ public class MainActivity extends ActionBarActivity
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
     /**
-     * A placeholder fragment containing a simple view.
+     * +     * A placeholder fragment containing a simple view.
+     * +
      */
     public static class PlaceholderFragment extends Fragment {
         /**
-         * The fragment argument representing the section number for this
-         * fragment.
+         * +         * The fragment argument representing the section number for this
+         * +         * fragment.
+         * +
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
 
+        public PlaceholderFragment() {
+        }
+
         /**
-         * Returns a new instance of this fragment for the given section
-         * number.
+         * +         * Returns a new instance of this fragment for the given section
+         * +         * number.
+         * +
          */
         public static PlaceholderFragment newInstance(int sectionNumber) {
             PlaceholderFragment fragment = new PlaceholderFragment();
@@ -128,12 +178,8 @@ public class MainActivity extends ActionBarActivity
             return fragment;
         }
 
-        public PlaceholderFragment() {
-        }
-
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             return rootView;
         }

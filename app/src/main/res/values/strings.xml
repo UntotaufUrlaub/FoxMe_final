@@ -1,14 +1,56 @@
 <resources>
-    <string name="app_name">FoxMe</string>
+    <string name="app_name">TheHappyHourApp</string>
 
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
+    <string name="title_section1">Konsument</string>
+    <string name="title_section2">Produzent</string>
+    <string name="title_section3">Profil</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_example">Example action</string>
+    <string name="action_example"> </string>
+    <!--TODO: update button -->
 
-    <string name="action_settings">Settings</string>
+
+    <string name="action_settings">Einstellungen</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Dies ist der erste Versuch ein Fragment zu erstellen</string>
+
+    <!-- jakob-->
+
+    <!-- von 16 bis 17 Uhr Happyhour \n im Hubbers -->
+    <!-- Von 19-20 Uhr \n halber Preis auf alle Fleischgerichte im StuCafe -->
+    <!-- Noch 5 Fischsemmeln beim Loui für 1€! -->
+
+    <!--die Liste mit allen tags-->
+    <string-array name="tags">
+        <item>Vegetarier</item>
+        <item>Veganer</item>
+        <item>Halal</item>
+        <item>Koscher</item>
+        <item>Pescetarier</item>
+        <item>Männlich</item>
+        <item>Weiblich</item>
+        <item>Alkohol</item>
+        <item>Tabak</item>
+        <item>Kinder</item>
+    </string-array>
+
+    <!-- jakob ende -->
+
+    <string-array name="Geschlecht">
+        <item>Männlich</item>
+        <item>Weiblich</item>
+    </string-array>
+
+    <string-array name="Essgewohnheit">
+        <item>Halal</item>
+        <item>Koscher</item>
+        <item>Pescetarier</item>
+        <item>Veganer</item>
+        <item>Vegetarier</item>
+    </string-array>
+
+
 </resources>
