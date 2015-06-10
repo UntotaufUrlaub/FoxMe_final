@@ -72,7 +72,7 @@
         android:layout_below="@+id/switch1"
         android:layout_marginTop="15dp"
         android:checked="true"
-        android:text="Tabak      " />
+            android:text="Fisch        " />
 
     <Switch
         android:id="@+id/switch3"
