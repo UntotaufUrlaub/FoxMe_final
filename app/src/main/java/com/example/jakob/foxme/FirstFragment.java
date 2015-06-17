@@ -76,7 +76,7 @@ public class FirstFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_konsument, container, false);
@@ -90,12 +90,12 @@ public class FirstFragment extends Fragment {
             //deklaration ende
 
             //button
-        final Button button = (Button) view.findViewById(R.id.button_konsument_fetchit);
+        Button button = (Button) view.findViewById(R.id.button_konsument_fetchit);
         button.setOnClickListener(new View.OnClickListener() {
             MainActivity mainActivity=new MainActivity();
             public void onClick(View v) {
                 // Perform action on click
-                Log.i("firstFragment","button geklickt");
+                Log.i("firstFragment", "erneuern - button geklickt");
                 ArrayList<String> temp= null;
                 try {
                     new MainController().execute("Select",null,null);
@@ -110,10 +110,17 @@ public class FirstFragment extends Fragment {
                 konsumentArrayAdapter.notifyDataSetChanged();
             }
         });
-            //button ende
+       /* Button button_detail = (Button) view.findViewById(R.id.detail_button_Konsument_eine_Anzeige);
+        button_detail.setOnClickListener(new View.OnClickListener() {
 
-        //--------------------------------------------------------------------------------------------------------------------------------------------
-
+            @Override
+            public void onClick(View v) {
+                Log.i("firstFragment","details - button geklickt");
+                LayoutInflater inflater1 = inflater;
+                ViewGroup container1=container;
+                inflater1.inflate(R.layout.fragment_konsument, container1, false);
+            }
+        });*/
         return view;
     }
 

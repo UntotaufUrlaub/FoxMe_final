@@ -58,7 +58,7 @@ public class MainController extends AsyncTask{
                 preparedStatement = connect.prepareStatement("INSERT INTO `FoxMe` VALUES  (?, ?, ?, ? , ?)");
                 preparedStatement.setString(1, (String) params[1]);                     //Anzeigentext
                 preparedStatement.setString(2, (String) params[2]);                     //Anzeigenadr
-                preparedStatement.setString(3, "TestTag");                              //Taglist, als String seperated by ; or #
+                preparedStatement.setString(3, (String) params[3]);                     //Taglist, als String seperated by ; or #
                 preparedStatement.setInt(4, 90);                                        //int TimeToLife
                 preparedStatement.setInt(5, 1);                                         //id needs to be incremented
                 preparedStatement.executeUpdate();

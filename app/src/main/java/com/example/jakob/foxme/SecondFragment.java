@@ -16,8 +16,8 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.jakob.foxme.Backend.AnzeigenServiceImpl;
 import com.example.jakob.foxme.Backend.MainController;
-import com.example.jakob.foxme.Backend.Produzent;
 
 import java.util.ArrayList;
 
@@ -36,14 +36,14 @@ public class SecondFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     //private static final String ARG_PARAM2 = "param2";
-    Produzent produzent = new Produzent();
+    AnzeigenServiceImpl anzeigenService = new AnzeigenServiceImpl();
     ListView tagAnzeigeListe;
     ArrayAdapter tagListAdapter;
     ArrayList<String> aktiveTags = new ArrayList();
+    boolean initalerknopfDruck = true;
     //Jakob------------------------------------------------------------------
     private EditText anzeigenText;
     private EditText anzeigenAdresse;
-    boolean initalerknopfDruck=true;
     //-----------------------------------------------------------------------
     //private String mParam2;
     // TODO: Rename and change types of parameters
@@ -127,7 +127,7 @@ public class SecondFragment extends Fragment {
                 anzeigenAdresse = (EditText) view.findViewById(R.id.editText2);
                 String text = anzeigenText.getText().toString();
                 String adresse = anzeigenAdresse.getText().toString();
-
+                String tagList = anzeigenService.tagListToString(aktiveTags);
                 //das Löschen der felder
                     anzeigenText.getText().clear();
                     anzeigenAdresse.getText().clear();
@@ -137,7 +137,7 @@ public class SecondFragment extends Fragment {
                 /*AnzeigenServiceImpl impl = new AnzeigenServiceImpl();
                 String test = impl.printAnzeigentxt(produzent.pushit(text, null, 0, adresse));
                 Log.i("Anzeigenerstellung", test);//testblock */
-                new MainController().execute("Insert", text, adresse);
+                new MainController().execute("Insert", text, adresse, tagList);
             }
         });
         return view;

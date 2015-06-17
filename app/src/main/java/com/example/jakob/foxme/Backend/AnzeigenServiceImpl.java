@@ -1,5 +1,7 @@
 package com.example.jakob.foxme.Backend;
 
+import android.text.TextUtils;
+
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -25,5 +27,11 @@ public class AnzeigenServiceImpl {
         nodup.addAll(liste);
         listeohnedup.addAll(nodup);
         return listeohnedup;
+    }
+
+    public String tagListToString(ArrayList<String> arrayList) {
+        String string = "hello_world";//instead of null
+        string = TextUtils.join("; ", arrayList);
+        return string;
     }
 }
