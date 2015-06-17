@@ -62,14 +62,12 @@ public class MainController extends AsyncTask{
                 preparedStatement.setInt(4, 90);                                        //int TimeToLife
                 preparedStatement.setInt(5, 1);                                         //id needs to be incremented
                 preparedStatement.executeUpdate();
-                }
-            else if(params[0]=="Select"){
+                } else if (params[0] == "Select") {//funktioniert, DO NOT ALTER
                 resultSet = statement.executeQuery("SELECT DISTINCT Anzeigentext, Adresse, Tags, TimeToLife FROM `FoxMe`"); // Result set get the result of the SQL query
-                Log.i("---Select-push :","executed Select-Query");
+                Log.i("---Select-push :", "start Select-Query");
                 int i=0;
                 while (resultSet.next()){
                     Anzeige anzeige=new Anzeige();
-                    Log.i("---Select-push :","entering while-Loop");
                     now.adresseProperty=resultSet.getString("Adresse");
                     now.anzeigentextProperty=resultSet.getString("Anzeigentext");
                     now.tagsProperty=resultSet.getString("Tags");
@@ -77,21 +75,16 @@ public class MainController extends AsyncTask{
                     try {
                         entries.add(now);
                             anzeige.setAnzeigentxt(entries.get(i).anzeigentextProperty);
-                            Log.i("---forloggerTXT", entries.get(i).anzeigentextProperty);
                             anzeige.setAdresse(entries.get(i).adresseProperty);
-                            Log.i("---forloggerADR", entries.get(i).adresseProperty);
                             anzeige.setTags(entries.get(i).tagsProperty);
-                            Log.i("---forloggerTAG", entries.get(i).tagsProperty);
                             anzeige.setLifetime(entries.get(i).timetolifeProperty);
-                            Log.i("---forloggerTTL", String.valueOf(entries.get(i).timetolifeProperty));
                             i++;
-                            liste123.add(anzeige); //TODO: fuegt immer nur die letzte Anzeige hinzu, warum?
-                        Log.i("--Anzeigetest :",anzeige.getAnzeigentxt());
-
+                        liste123.add(anzeige);
                     }catch (Exception e) {
                         Log.i("---Select-push-excep :","abgeschmiert?");
                         e.printStackTrace();                    }
                     }
+                Log.i("---Select-push :", "end Select-Query");
                 }
         } catch (Exception e) {
             try {
@@ -104,13 +97,14 @@ public class MainController extends AsyncTask{
                 Log.i("SqlException ", "damn it not again");
             }
         } finally {
+
             close();
 
         }
         MainActivity.liste=liste123;
         for(int i=0;i<liste123.size();i++){
             String testlogger=liste123.get(i).getAnzeigentxt();
-            Log.i("--liste123 :",testlogger);
+            Log.i("--Ausgabenliste :", testlogger);
         }
         return liste123;
     }
