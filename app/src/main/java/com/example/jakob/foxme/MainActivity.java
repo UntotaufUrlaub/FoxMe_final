@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.jakob.foxme.Backend.Anzeige;
-import com.example.jakob.foxme.Backend.MainController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +58,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        new MainController().execute("Select",null,null);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -90,9 +88,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 
         }
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, fragment) //TODO change every Placeholder
-                .commit();
+        fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
     }
 
     public void onSectionAttached(int number) {
