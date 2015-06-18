@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.jakob.foxme.Backend.AnzeigenServiceImpl;
+import com.example.jakob.foxme.Backend.Filter;
 import com.example.jakob.foxme.Backend.MainController;
 
 import java.util.ArrayList;
@@ -93,13 +94,14 @@ public class FirstFragment extends Fragment {
         Button button = (Button) view.findViewById(R.id.button_konsument_fetchit);
         button.setOnClickListener(new View.OnClickListener() {
             MainActivity mainActivity=new MainActivity();
+            Filter filter = new Filter();
             public void onClick(View v) {
                 // Perform action on click
                 Log.i("firstFragment", "erneuern - button geklickt");
                 ArrayList<String> temp= null;
                 try {
                     new MainController().execute("Select",null,null);
-                    temp = anzeigenService.fetchAnzeigentxt(mainActivity.liste);//new AnzeigenServiceMockup().fetchAnzeige());
+                    temp = anzeigenService.fetchAnzeigentxt(filter.filterit(mainActivity.liste));//new AnzeigenServiceMockup().fetchAnzeige());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

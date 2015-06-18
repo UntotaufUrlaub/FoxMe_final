@@ -101,8 +101,7 @@ public class MainController extends AsyncTask{
             close();
 
         }
-        Filter filter = new Filter();
-        MainActivity.liste = filter.filterit(liste123); //Changed
+        MainActivity.liste = liste123;
         for(int i=0;i<liste123.size();i++){
             String testlogger=liste123.get(i).getAnzeigentxt();
             Log.i("--Ausgabenliste :", testlogger);
