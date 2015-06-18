@@ -13,15 +13,24 @@ public class Filter {
     }
 
     public ArrayList<Anzeige> filterit(ArrayList<Anzeige> ungefilterteListe) {
+        AnzeigenServiceImpl anzeigenService = new AnzeigenServiceImpl();
         ArrayList<Anzeige> returnList = new ArrayList();              //legt eine leer Liste an, in die die passenden Anzeigen geschrieben werden
         Anzeige anzeige = new Anzeige();
-        String anzeigenTag;
         ArrayList<String> anzeigenTagListe;
         for (int i = 0; i < ungefilterteListe.size(); i++) {
             anzeige = ungefilterteListe.get(i);                       //holt die erste Anzeige aus der Liste
-            anzeigenTag = anzeige.getTags();                          //holt die Tags
-
+            anzeigenTagListe = anzeigenService.stringToTagList(anzeige.getTags());//holt die Tags
+            for (int j = 0; j < anzeigenTagListe.size(); j++) {
+                if (anzeigenTagListe.get(j).equals("Alles")) {
+                    returnList.add(anzeige);
+                }
+                for (int k = 0; k < localTag.size(); k++) {
+                    if (anzeigenTagListe.get(j).equals(localTag.get(k))) {
+                        returnList.add(anzeige);
+                    }
+                }
+            }
         }
-        return null;
+        return returnList;
     }
 }

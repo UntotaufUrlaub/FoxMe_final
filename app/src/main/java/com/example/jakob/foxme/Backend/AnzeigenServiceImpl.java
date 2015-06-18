@@ -3,6 +3,7 @@ package com.example.jakob.foxme.Backend;
 import android.text.TextUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
 
@@ -36,8 +37,8 @@ public class AnzeigenServiceImpl {
     }
 
     public ArrayList<String> stringToTagList(String string) {
-        ArrayList<String> arrayList = new ArrayList();
-        arrayList = TextUtils.split(string, ";")
+        String[] zwischenspeicher = TextUtils.split(string, "; ");
+        ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(zwischenspeicher));
         return arrayList;
     }
 }
