@@ -34,4 +34,10 @@ public class AnzeigenServiceImpl {
         string = TextUtils.join("; ", arrayList);
         return string;
     }
+
+    public ArrayList<String> stringToTagList(String string) {
+        ArrayList<String> arrayList = new ArrayList();
+        arrayList = TextUtils.split(string, ";")
+        return arrayList;
+    }
 }
