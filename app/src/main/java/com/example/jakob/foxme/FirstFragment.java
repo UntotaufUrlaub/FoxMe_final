@@ -94,8 +94,14 @@ public class FirstFragment extends Fragment {
             //deklaration ende
 
             //button
-        Button button = (Button) view.findViewById(R.id.button_konsument_fetchit);
-        button.setOnClickListener(new View.OnClickListener() {
+        /*final Button button_details = (Button) view.findViewById(R.id.detail_button_Konsument_eine_Anzeige);
+        button_details.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+
+            }
+        });*/
+        final Button button_erneuern = (Button) view.findViewById(R.id.button_konsument_fetchit);
+        button_erneuern.setOnClickListener(new View.OnClickListener() {
             MainActivity mainActivity = new MainActivity();
             Filter filter = new Filter();
 
