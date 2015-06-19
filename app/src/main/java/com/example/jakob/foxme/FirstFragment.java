@@ -31,23 +31,14 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class FirstFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_SECTION_NUMBER = "sectionNumber";
-    //private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
     public int mParam1;
     public boolean filterbool = true;
-
-    //private String mParam2;
-    //Eigene Attribute Jakob-----------------------------------------------------------------------------------------------------------------------
     ListView konsumentListView;
     ArrayAdapter konsumentArrayAdapter;
     ArrayList<String> konsumentListeInfoTexte=new ArrayList();
     AnzeigenServiceImpl anzeigenService = new AnzeigenServiceImpl();
     private OnFragmentInteractionListener mListener;
-    //---------------------------------------------------------------------------------------------------------------------------------------------
 
     public FirstFragment() {
         // Required empty public constructor
@@ -60,12 +51,10 @@ public class FirstFragment extends Fragment {
      * @param sectionNumber Parameter 1.
      * @return A new instance of fragment FirstFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static FirstFragment newInstance(int sectionNumber) {
         FirstFragment fragment = new FirstFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-        //args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -75,7 +64,6 @@ public class FirstFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getInt(ARG_SECTION_NUMBER);
-            //mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -84,16 +72,10 @@ public class FirstFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_konsument, container, false);
-
-        //refresh button -----------------------------------------------------------------------------------------------------------------------------------
-
-            //deklaration
         konsumentListView = (ListView) view.findViewById(R.id.konsument_list_view);
         konsumentArrayAdapter = new ArrayAdapter<String>(getActivity(), R.layout.info_layout, R.id.info_item, konsumentListeInfoTexte);
         konsumentListView.setAdapter(konsumentArrayAdapter);
-            //deklaration ende
 
-            //button
         /*final Button button_details = (Button) view.findViewById(R.id.detail_button_Konsument_eine_Anzeige);
         button_details.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
