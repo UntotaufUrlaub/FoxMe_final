@@ -25,6 +25,7 @@
 
     <!--die Liste mit allen tags-->
     <string-array name="tags">
+        <item>Alles</item>
         <item>Vegetarier</item>
         <item>Veganer</item>
         <item>Halal</item>

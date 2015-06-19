@@ -157,6 +157,7 @@
             android:layout_toRightOf="@+id/textView3"
             android:background="#ffffff"
             android:ems="10"
+            android:hint="TT.MM.JJJJ"
             android:inputType="date" />
 
         <EditText
@@ -168,6 +169,7 @@
             android:layout_toRightOf="@+id/switch3"
             android:background="#ffffff"
             android:ems="10"
+            android:hint="0891234567"
             android:inputType="phone" />
 
         <EditText
@@ -180,7 +182,8 @@
             android:layout_below="@+id/editText6"
             android:layout_marginTop="15dp"
             android:layout_toRightOf="@+id/switch3"
-            android:background="#ffffff" />
+            android:background="#ffffff"
+            android:hint="Musterstr." />
 
         <EditText
             android:id="@+id/editText6"
@@ -191,8 +194,8 @@
             android:layout_alignLeft="@+id/editText5"
             android:layout_alignRight="@+id/editText5"
             android:layout_alignStart="@+id/editText5"
-
-            android:background="#ffffff" />
+            android:background="#ffffff"
+            android:hint="Mustername" />
 
     </RelativeLayout>
 </ScrollView>

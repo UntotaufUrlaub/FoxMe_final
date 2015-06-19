@@ -1,47 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:id="@+id/info_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffffff"
-    >
+    android:focusable="false"
+    android:focusableInTouchMode="false"
+    android:orientation="vertical">
 
     <TextView
+        android:id="@+id/info_item"
         android:layout_width="match_parent"
         android:layout_height="79dp"
-        android:id="@+id/info_item"
-        android:textAppearance="?android:textAppearanceLarge"
-        android:textColor="#000000"
-        android:text="hallo World"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
         android:layout_marginBottom="10dp"
-        />
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:outlineProvider="background"
+        android:shadowColor="#080"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="10"
+        android:text="hallo World"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textColor="#000000" />
 
     <RelativeLayout
-        android:layout_height="40dp"
         android:layout_width="match_parent"
+        android:layout_height="40dp"
     >
 
         <Button
             android:id="@+id/detail_button_Konsument_eine_Anzeige"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:text="Details"
-            android:layout_gravity="right"
-            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentTop="true"
+            android:layout_gravity="right"
+            android:text="Details" />
 
         <Button
+            android:id="@+id/löschen_button_Konsument_eine_Anzeige"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Löschen"
-            android:id="@+id/löschen_button_Konsument_eine_Anzeige"
-            android:layout_gravity="center_horizontal"
-            android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center_horizontal"
+            android:text="Löschen" />
     </RelativeLayout>
 
 </LinearLayout>
