@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.Switch;
 
 import com.example.jakob.foxme.Backend.AnzeigenServiceImpl;
 import com.example.jakob.foxme.Backend.Filter;
@@ -36,6 +38,7 @@ public class FirstFragment extends Fragment {
 
     // TODO: Rename and change types of parameters
     public int mParam1;
+    public boolean filterbool = true;
 
     //private String mParam2;
     //Eigene Attribute Jakob-----------------------------------------------------------------------------------------------------------------------
@@ -93,38 +96,39 @@ public class FirstFragment extends Fragment {
             //button
         Button button = (Button) view.findViewById(R.id.button_konsument_fetchit);
         button.setOnClickListener(new View.OnClickListener() {
-            MainActivity mainActivity=new MainActivity();
+            MainActivity mainActivity = new MainActivity();
             Filter filter = new Filter();
+
             public void onClick(View v) {
                 // Perform action on click
                 Log.i("firstFragment", "erneuern - button geklickt");
-                ArrayList<String> temp= null;
+                ArrayList<String> temp = null;
                 try {
-                    new MainController().execute("Select",null,null);
-                    temp = anzeigenService.fetchAnzeigentxt(filter.filterit(mainActivity.liste));//new AnzeigenServiceMockup().fetchAnzeige());
+                    new MainController().execute("Select", null, null);
+                    temp = anzeigenService.fetchAnzeigentxt(filter.filterit(mainActivity.liste, filterbool));//new AnzeigenServiceMockup().fetchAnzeige());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 konsumentListeInfoTexte.clear();
-                for(int i=0;i<temp.size();i++){
+                for (int i = 0; i < temp.size(); i++) {
                     konsumentListeInfoTexte.add(temp.get(i));
                 }
                 konsumentArrayAdapter.notifyDataSetChanged();
             }
         });
-       /* Button button_detail = (Button) view.findViewById(R.id.detail_button_Konsument_eine_Anzeige);
-        button_detail.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Log.i("firstFragment","details - button geklickt");
-                LayoutInflater inflater1 = inflater;
-                ViewGroup container1=container;
-                inflater1.inflate(R.layout.fragment_konsument, container1, false);
+        Switch aSwitch = (Switch) view.findViewById(R.id.togglebutton);
+        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    filterbool = true;
+                } else {
+                    filterbool = false;
+                }
             }
-        });*/
+        });
         return view;
     }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

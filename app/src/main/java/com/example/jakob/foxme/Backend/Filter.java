@@ -14,8 +14,8 @@ public class Filter {
         this.localTag = localTag;
     }
 
-    public ArrayList<Anzeige> filterit(List<Anzeige> ungefilterteListe) {
-        //localTag.add("Alkohol");
+    public ArrayList<Anzeige> filterit(List<Anzeige> ungefilterteListe, Boolean filterbool) {
+        if (filterbool) {
         localTag.add("Veganer");
         AnzeigenServiceImpl anzeigenService = new AnzeigenServiceImpl();
         ArrayList<Anzeige> returnList = new ArrayList();              //legt eine leer Liste an, in die die passenden Anzeigen geschrieben werden
@@ -35,6 +35,9 @@ public class Filter {
                 }
             }
         }
-        return returnList;
+            return returnList;
+        } else {
+            return (ArrayList<Anzeige>) ungefilterteListe;
+        }
     }
 }

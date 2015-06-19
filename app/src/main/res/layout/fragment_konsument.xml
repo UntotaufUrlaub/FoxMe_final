@@ -29,12 +29,12 @@
         android:text="Erneuern" />
 
     <Switch
-        android:id="@+id/switch4"
+        android:id="@+id/togglebutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/konsument_list_view"
         android:layout_toRightOf="@+id/button_konsument_fetchit"
-
+        android:checked="true"
         android:text="Filter" />
 
 
