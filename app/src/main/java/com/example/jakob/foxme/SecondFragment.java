@@ -133,10 +133,6 @@ public class SecondFragment extends Fragment {
                     anzeigenAdresse.getText().clear();
                     aktiveTags.clear();
                     tagListAdapter.notifyDataSetChanged();
-
-                /*AnzeigenServiceImpl impl = new AnzeigenServiceImpl();
-                String test = impl.printAnzeigentxt(produzent.pushit(text, null, 0, adresse));
-                Log.i("Anzeigenerstellung", test);//testblock */
                 new MainController().execute("Insert", text, adresse, tagList);
             }
         });
