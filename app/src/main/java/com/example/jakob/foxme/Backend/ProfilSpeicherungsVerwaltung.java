@@ -1,6 +1,7 @@
 package com.example.jakob.foxme.Backend;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -46,7 +47,6 @@ public class ProfilSpeicherungsVerwaltung {
             InputStreamReader isr = new InputStreamReader(fis);
             char[] data =new char [100];
             int size;
-
             try {
                 while((size=isr.read(data))>0){
                     String read_data= String.copyValueOf(data,0,size);
@@ -56,11 +56,12 @@ public class ProfilSpeicherungsVerwaltung {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-        } catch (FileNotFoundException e) {
+            fis.close();
+        } catch (Exception e) {
+            Log.i("profil speichern","catch outer exeption-----------------------------------------------------------------------------------------------------");
             e.printStackTrace();
+            ausgabe="";     //standart zustand des Profils
         }
-
         return ausgabe;
     }
 }

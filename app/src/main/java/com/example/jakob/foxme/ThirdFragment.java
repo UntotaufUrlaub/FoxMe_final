@@ -4,9 +4,14 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Spinner;
+
+import com.example.jakob.foxme.Backend.ProfilSpeicherungsVerwaltung;
 
 
 /**
@@ -28,6 +33,13 @@ public class ThirdFragment extends Fragment {
     //private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    //jakob
+    ProfilSpeicherungsVerwaltung pSV=new ProfilSpeicherungsVerwaltung(getActivity());
+    Spinner spinner1;
+    Spinner spinner2;
+    int[] zustaende=new int[2];
+    //jakob ende
 
     public ThirdFragment() {
         // Required empty public constructor
@@ -63,7 +75,50 @@ public class ThirdFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_third, container, false);
+        View view=inflater.inflate(R.layout.fragment_third, container, false);
+        //Jakob
+
+        //laed den zustand des profils aus dem speicher
+        String speicherGesammt=pSV.load();
+        Log.i("Thirdfragment","speicherGesammt: "+speicherGesammt);
+        String[] speicherTeile=speicherGesammt.split(" ");
+        Log.i("Thirdfragment","speicherTeile: "+speicherTeile.toString());
+
+        //setze den zustand des profils auf den gespeicherten Zustand
+        zustaende[0]=1;
+        zustaende[1]=2;
+
+        //setzt die oberfläche gemäß dem zustand
+        spinner1=(Spinner) view.findViewById(R.id.spinner);
+        spinner1.setSelection(zustaende[0]);
+
+        spinner2=(Spinner) view.findViewById(R.id.spinner2);
+        spinner2.setSelection(zustaende[1]);
+
+        /*
+        spinner1=(Spinner) view.findViewById(R.id.spinner2);
+        if(speicherTeile.length>0){
+            Log.i("Thirdfragment","im if 1");
+            spinner1.setSelection(Integer.parseInt(speicherTeile[0]));
+        }
+        else{
+            Log.i("Thirdfragment","nicht in if 1");
+        }
+        /*
+        /*
+        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                pSV.save(spinner1.getSelectedItemPosition()+" ");
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+        */
+        //Jakob ende
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

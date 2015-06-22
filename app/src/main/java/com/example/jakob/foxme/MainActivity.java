@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ViewSwitcher;
 
 import com.example.jakob.foxme.Backend.Anzeige;
+import com.example.jakob.foxme.Backend.ProfilSpeicherungsVerwaltung;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +41,13 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Jakob
+        ProfilSpeicherungsVerwaltung a=new ProfilSpeicherungsVerwaltung(this);
+        a.save("versuch eins");
+        Log.i("Main Activity","gespeichert 1: "+a.load());
+        Log.i("Main Activity","gespeichert 2: "+a.load());
+        //Jakob
         setContentView(R.layout.activity_main);
-
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
