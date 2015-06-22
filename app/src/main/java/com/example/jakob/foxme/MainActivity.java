@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ViewSwitcher;
 
 import com.example.jakob.foxme.Backend.Anzeige;
 
@@ -70,6 +71,19 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
     }
+
+    public void detailSwitcher(View view) {
+        View ansicht = (View) findViewById(R.id.viewswitcher);
+        final View myFirstView = ansicht.findViewById(R.id.info_item);
+        final ViewSwitcher viewSwitcher = (ViewSwitcher) ansicht.findViewById(R.id.viewswitcher);
+        final View mySecondView = ansicht.findViewById(R.id.view2);
+        if (viewSwitcher.getCurrentView() != myFirstView) {
+            viewSwitcher.showPrevious();
+        } else if (viewSwitcher.getCurrentView() != mySecondView) {
+            viewSwitcher.showNext();
+        }
+    }
+
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {

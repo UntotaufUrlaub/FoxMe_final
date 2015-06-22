@@ -75,13 +75,6 @@ public class FirstFragment extends Fragment {
         konsumentListView = (ListView) view.findViewById(R.id.konsument_list_view);
         konsumentArrayAdapter = new ArrayAdapter<String>(getActivity(), R.layout.info_layout, R.id.info_item, konsumentListeInfoTexte);
         konsumentListView.setAdapter(konsumentArrayAdapter);
-
-        /*final Button button_details = (Button) view.findViewById(R.id.detail_button_Konsument_eine_Anzeige);
-        button_details.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v) {
-
-            }
-        });*/
         final Button button_erneuern = (Button) view.findViewById(R.id.button_konsument_fetchit);
         button_erneuern.setOnClickListener(new View.OnClickListener() {
             MainActivity mainActivity = new MainActivity();
