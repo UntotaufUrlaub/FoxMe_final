@@ -21,27 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-//nice endlich mal
-/*
-    @Override
-    public void onNavigationDrawerItemSelected(int position) {
-
-        Fragment fragment = null;
-
-        switch (position) {
-            case 0:
-                fragment = FirstFragment.newInstance(position + 1);
-                break;
-            case 1:
-                fragment = SecondFragment.newInstance(position + 1);
-                break;
-            case 2:
-                fragment = ThirdFragment.newInstance(position + 1);
-
-        }
-        FragmentManager frag..........
-*/
-
 public class MainActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks, FirstFragment.OnFragmentInteractionListener,
         SecondFragment.OnFragmentInteractionListener, ThirdFragment.OnFragmentInteractionListener {
     public static List<Anzeige> liste=new ArrayList();
