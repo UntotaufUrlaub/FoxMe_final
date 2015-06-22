@@ -51,7 +51,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                 (DrawerLayout) findViewById(R.id.drawer_layout));
     }
 
-    public void detailSwitcher(View view) {
+    public void detailSwitcher(View view) {//TODO: manage behavior of detail-button
         View ansicht = (View) findViewById(R.id.viewswitcher);
         final View myFirstView = ansicht.findViewById(R.id.info_item);
         final ViewSwitcher viewSwitcher = (ViewSwitcher) ansicht.findViewById(R.id.viewswitcher);
