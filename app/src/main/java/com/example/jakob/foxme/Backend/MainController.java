@@ -93,7 +93,7 @@ public class MainController extends AsyncTask{
                 e1.printStackTrace();
                 Log.i("Class not Found ","damn it not again");
             } catch (SQLException e1) {
-                e1.printStackTrace();
+                e1.printStackTrace();//TODO: Warnung am Bildschirm dass die Anzeige nicht abgeschickt wurde aufgrund eines DB-Fehlers
                 Log.i("SqlException ", "damn it not again");
             }
         } finally {
