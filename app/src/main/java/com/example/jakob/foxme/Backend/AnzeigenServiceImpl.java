@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class AnzeigenServiceImpl {
 
-    public ArrayList<String> fetchAnzeigentxt(List<Anzeige> anzeigenListe) throws Exception { //liefert eine Liste mit den Anzeigentexten zur�ck
+    public ArrayList<String> fetchAnzeigentxt(List<Anzeige> anzeigenListe) { //liefert eine Liste mit den Anzeigentexten zur�ck
         Anzeige anzeige;
         ArrayList<String> text = new ArrayList<String>();
         for (int i = 0; i < anzeigenListe.size(); i++) {

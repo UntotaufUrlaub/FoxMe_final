@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Spinner;
 
 import com.example.jakob.foxme.Backend.ProfilSpeicherungsVerwaltung;
@@ -27,18 +26,16 @@ public class ThirdFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     //private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private int mParam1;
-    //private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
-
     //jakob
-    ProfilSpeicherungsVerwaltung pSV=new ProfilSpeicherungsVerwaltung(getActivity());
+    MainActivity mainActivity = new MainActivity();
+    //private String mParam2;
+    ProfilSpeicherungsVerwaltung pSV = new ProfilSpeicherungsVerwaltung(mainActivity.refContext);
     Spinner spinner1;
     Spinner spinner2;
     int[] zustaende=new int[2];
+    // TODO: Rename and change types of parameters
+    private int mParam1;
+    private OnFragmentInteractionListener mListener;
     //jakob ende
 
     public ThirdFragment() {

@@ -1,6 +1,7 @@
 package com.example.jakob.foxme;
 
 import android.app.Activity;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -26,6 +27,8 @@ import java.util.List;
 public class MainActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks, FirstFragment.OnFragmentInteractionListener,
         SecondFragment.OnFragmentInteractionListener, ThirdFragment.OnFragmentInteractionListener {
     public static List<Anzeige> liste=new ArrayList();
+    Context refContext = null;
+
     /*
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -42,7 +45,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Jakob
-        ProfilSpeicherungsVerwaltung a=new ProfilSpeicherungsVerwaltung(this);
+        refContext = this;
+        ProfilSpeicherungsVerwaltung a = new ProfilSpeicherungsVerwaltung(refContext);
+
         a.save("versuch eins");
         Log.i("Main Activity","gespeichert 1: "+a.load());
         Log.i("Main Activity","gespeichert 2: "+a.load());
@@ -60,7 +65,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 
     public void detailSwitcher(View view) {//TODO: manage behavior of detail-button
         View ansicht = (View) findViewById(R.id.viewswitcher);
-        final View myFirstView = ansicht.findViewById(R.id.info_item);
+        final View myFirstView = ansicht.findViewById(R.id.view1);//info_item
         final ViewSwitcher viewSwitcher = (ViewSwitcher) ansicht.findViewById(R.id.viewswitcher);
         final View mySecondView = ansicht.findViewById(R.id.view2);
         if (viewSwitcher.getCurrentView() != myFirstView) {

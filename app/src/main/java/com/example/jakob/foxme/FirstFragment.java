@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +14,7 @@ import android.widget.ListView;
 import android.widget.Switch;
 
 import com.example.jakob.foxme.Backend.AnzeigenServiceImpl;
-import com.example.jakob.foxme.Backend.Filter;
-import com.example.jakob.foxme.Backend.MainController;
+import com.example.jakob.foxme.Backend.RevieverTask;
 
 import java.util.ArrayList;
 
@@ -33,7 +31,7 @@ import java.util.ArrayList;
 public class FirstFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "sectionNumber";
     public int mParam1;
-    public boolean filterbool = true;
+    public String filterbool = "true";
     ListView konsumentListView;
     ArrayAdapter konsumentArrayAdapter;
     ArrayList<String> konsumentListeInfoTexte=new ArrayList();
@@ -77,33 +75,18 @@ public class FirstFragment extends Fragment {
         konsumentListView.setAdapter(konsumentArrayAdapter);
         final Button button_erneuern = (Button) view.findViewById(R.id.button_konsument_fetchit);
         button_erneuern.setOnClickListener(new View.OnClickListener() {
-            MainActivity mainActivity = new MainActivity();
-            Filter filter = new Filter();
-
             public void onClick(View v) {
-                // Perform action on click
-                Log.i("firstFragment", "erneuern - button geklickt");
-                ArrayList<String> temp = null;
-                try {
-                    new MainController().execute("Select", null, null);
-                    temp = anzeigenService.fetchAnzeigentxt(filter.filterit(mainActivity.liste, filterbool));//new AnzeigenServiceMockup().fetchAnzeige());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                konsumentListeInfoTexte.clear();
-                for (int i = 0; i < temp.size(); i++) {
-                    konsumentListeInfoTexte.add(temp.get(i));
-                }
-                konsumentArrayAdapter.notifyDataSetChanged();
+                RevieverTask testklasse = new RevieverTask(getActivity(), filterbool);
+                testklasse.execute();
             }
         });
         Switch aSwitch = (Switch) view.findViewById(R.id.togglebutton);
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    filterbool = true;
+                    filterbool = "true";
                 } else {
-                    filterbool = false;
+                    filterbool = "false";
                 }
             }
         });
