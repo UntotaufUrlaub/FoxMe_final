@@ -8,8 +8,20 @@
     // das ersetzt fragment_first
     //android:background="#13DF42"
 
+    <Switch
+        android:id="@+id/togglebutton"
+        style="@style/Base.TextAppearance.AppCompat.Widget.Switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/konsument_list_view"
+        android:layout_gravity="center_horizontal"
+        android:layout_toRightOf="@+id/button_konsument_fetchit"
+        android:checked="true"
+        android:text="Filter" />
+
     <ListView
         android:id="@+id/konsument_list_view"
+        style="@style/Base.Widget.AppCompat.DrawerArrowToggle.Common"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="10dp"
@@ -28,15 +40,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
         android:text="Erneuern" />
-
-    <Switch
-        android:id="@+id/togglebutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/konsument_list_view"
-        android:layout_toRightOf="@+id/button_konsument_fetchit"
-        android:checked="true"
-        android:text="Filter" />
 
 
 </LinearLayout>

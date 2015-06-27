@@ -17,7 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.jakob.foxme.Backend.AnzeigenServiceImpl;
-import com.example.jakob.foxme.Backend.MainController;
+import com.example.jakob.foxme.Backend.SenderTask;
 
 import java.util.ArrayList;
 
@@ -133,7 +133,7 @@ public class SecondFragment extends Fragment {
                     anzeigenAdresse.getText().clear();
                     aktiveTags.clear();
                     tagListAdapter.notifyDataSetChanged();
-                new MainController().execute("Insert", text, adresse, tagList);
+                new SenderTask().execute("Insert", text, adresse, tagList);
             }
         });
         return view;

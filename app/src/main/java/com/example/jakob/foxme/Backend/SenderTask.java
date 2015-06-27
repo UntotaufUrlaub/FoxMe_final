@@ -17,9 +17,9 @@ import java.util.List;
 
 
 /**
- * Created by Andi on 11.05.2015.
+ * Created by Andi Goodfella on 11.05.2015.
  */
-public class MainController extends AsyncTask{
+public class SenderTask extends AsyncTask {
 
     public List<Anzeige> liste123 = new ArrayList<>();
     List<ResultEntry> entries = Lists.newArrayList();
@@ -54,38 +54,14 @@ public class MainController extends AsyncTask{
             Class.forName("com.mysql.jdbc.Driver");            // This will load the MySQL driver, each DB has its own driver
             connect = DriverManager.getConnection("jdbc:mysql://sql5.freemysqlhosting.net/sql579051?" + "user=sql579051&password=zY7!kX3%");          // Setup the connection with the DB
             statement = connect.createStatement();            // Statements allow to issue SQL queries to the database
-            if(params[0]=="Insert"){//funktioniert, DO NOT ALTER
-                preparedStatement = connect.prepareStatement("INSERT INTO `FoxMe` VALUES  (?, ?, ?, ? , ?)");
+            //funktioniert, DO NOT ALTER
+            preparedStatement = connect.prepareStatement("INSERT INTO `FoxMeFinal` VALUES  (?, ?, ?, ? , ?)");
                 preparedStatement.setString(1, (String) params[1]);                     //Anzeigentext
                 preparedStatement.setString(2, (String) params[2]);                     //Anzeigenadr
                 preparedStatement.setString(3, (String) params[3]);                     //Taglist, als String seperated by ; or #
                 preparedStatement.setInt(4, 90);                                        //int TimeToLife
                 preparedStatement.setInt(5, 1);                                         //id needs to be incremented
                 preparedStatement.executeUpdate();
-                } else if (params[0] == "Select") {//funktioniert, DO NOT ALTER
-                resultSet = statement.executeQuery("SELECT DISTINCT Anzeigentext, Adresse, Tags, TimeToLife FROM `FoxMe`"); // Result set get the result of the SQL query
-                Log.i("---Select-push :", "start Select-Query");
-                int i=0;
-                while (resultSet.next()){
-                    Anzeige anzeige=new Anzeige();
-                    now.adresseProperty=resultSet.getString("Adresse");
-                    now.anzeigentextProperty=resultSet.getString("Anzeigentext");
-                    now.tagsProperty=resultSet.getString("Tags");
-                    now.timetolifeProperty=resultSet.getInt("TimeToLife");
-                    try {
-                        entries.add(now);
-                            anzeige.setAnzeigentxt(entries.get(i).anzeigentextProperty);
-                            anzeige.setAdresse(entries.get(i).adresseProperty);
-                            anzeige.setTags(entries.get(i).tagsProperty);
-                            anzeige.setLifetime(entries.get(i).timetolifeProperty);
-                            i++;
-                        liste123.add(anzeige);
-                    }catch (Exception e) {
-                        Log.i("---Select-push-excep :","abgeschmiert?");
-                        e.printStackTrace();                    }
-                    }
-                Log.i("---Select-push :", "end Select-Query");
-                }
         } catch (Exception e) {
             try {
                 throw e;
@@ -94,12 +70,11 @@ public class MainController extends AsyncTask{
                 Log.i("Class not Found ","damn it not again");
             } catch (SQLException e1) {
                 e1.printStackTrace();//TODO: Warnung am Bildschirm dass die Anzeige nicht abgeschickt wurde aufgrund eines DB-Fehlers
+                //Toast.makeText(null, "Die Anzeige konnte nicht abgeschickt werden.s", Toast.LENGTH_LONG).show();
                 Log.i("SqlException ", "damn it not again");
             }
         } finally {
-
             close();
-
         }
         MainActivity.liste = liste123;
         for(int i=0;i<liste123.size();i++){
@@ -108,11 +83,9 @@ public class MainController extends AsyncTask{
         }
         return liste123;
     }
-
-
-
     public class ResultEntry {
         public String anzeigentextProperty;
+        //Keine Ahnung was hier gemacht wurde aber schein fancy zu sein
         public String adresseProperty;
         public String tagsProperty;
         public int timetolifeProperty;

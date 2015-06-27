@@ -76,7 +76,7 @@ public class RevieverTask extends AsyncTask<String[], Void, Boolean> {
             Class.forName("com.mysql.jdbc.Driver");            // This will load the MySQL driver, each DB has its own driver
             connect = DriverManager.getConnection("jdbc:mysql://sql5.freemysqlhosting.net/sql579051?" + "user=sql579051&password=zY7!kX3%");          // Setup the connection with the DB
             statement = connect.createStatement();            // Statements allow to issue SQL queries to the database
-            resultSet = statement.executeQuery("SELECT DISTINCT Anzeigentext, Adresse, Tags, TimeToLife FROM `FoxMe`"); // Result set get the result of the SQL query
+            resultSet = statement.executeQuery("SELECT DISTINCT Anzeigentext, Adresse, Tags, TimeToLife FROM `FoxMeFinal`"); // Result set get the result of the SQL query
             Log.i("---Select-push :", "start Select-Query");
             int i = 0;
             while (resultSet.next()) {
