@@ -4,7 +4,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.jakob.foxme.MainActivity;
-import com.google.common.collect.Lists;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -22,8 +21,6 @@ import java.util.List;
 public class SenderTask extends AsyncTask {
 
     public List<Anzeige> liste123 = new ArrayList<>();
-    List<ResultEntry> entries = Lists.newArrayList();
-    ResultEntry now = new ResultEntry();
     private Connection connect = null;
     private Statement statement = null;
     private PreparedStatement preparedStatement = null;
@@ -82,13 +79,5 @@ public class SenderTask extends AsyncTask {
             Log.i("--Ausgabenliste :", testlogger);
         }
         return liste123;
-    }
-    public class ResultEntry {
-        public String anzeigentextProperty;
-        //Keine Ahnung was hier gemacht wurde aber schein fancy zu sein
-        public String adresseProperty;
-        public String tagsProperty;
-        public int timetolifeProperty;
-        public int idProperty;
     }
 }
