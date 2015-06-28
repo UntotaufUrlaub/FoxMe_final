@@ -18,7 +18,6 @@ public class ProfilSpeicherungsVerwaltung {
 
     public ProfilSpeicherungsVerwaltung(Context c){
         context=c;
-
     }
 
     public void save(String eingabe){
@@ -60,7 +59,7 @@ public class ProfilSpeicherungsVerwaltung {
         } catch (Exception e) {
             Log.i("profil speichern","catch outer exeption-----------------------------------------------------------------------------------------------------");
             e.printStackTrace();
-            ausgabe="";     //standart zustand des Profils
+            ausgabe="0 0";     //standart zustand des Profils
         }
         return ausgabe;
     }

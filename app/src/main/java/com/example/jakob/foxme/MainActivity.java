@@ -1,7 +1,6 @@
 package com.example.jakob.foxme;
 
 import android.app.Activity;
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -26,9 +25,8 @@ import java.util.List;
 
 public class MainActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks, FirstFragment.OnFragmentInteractionListener,
         SecondFragment.OnFragmentInteractionListener, ThirdFragment.OnFragmentInteractionListener {
-    public static List<Anzeige> liste=new ArrayList();
-    Context refContext = null;
 
+    public static List<Anzeige> liste=new ArrayList();
     /*
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -45,12 +43,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Jakob
-        refContext = this;
-        ProfilSpeicherungsVerwaltung a = new ProfilSpeicherungsVerwaltung(refContext);
-
-        a.save("versuch eins");
-        Log.i("Main Activity","gespeichert 1: "+a.load());
-        Log.i("Main Activity","gespeichert 2: "+a.load());
+        Log.i("Main Activity","compile Zustand: 4");
         //Jakob
         setContentView(R.layout.activity_main);
         mNavigationDrawerFragment = (NavigationDrawerFragment)
@@ -89,8 +82,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                 fragment = SecondFragment.newInstance(position + 1);
                 break;
             case 2:
-                fragment = ThirdFragment.newInstance(position + 1);
-
+                fragment = ThirdFragment.newInstance();
         }
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
