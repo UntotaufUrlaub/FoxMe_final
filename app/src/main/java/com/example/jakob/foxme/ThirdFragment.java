@@ -1,6 +1,7 @@
 package com.example.jakob.foxme;
 
 import android.app.Activity;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Spinner;
 
 import com.example.jakob.foxme.Backend.ProfilSpeicherungsVerwaltung;
@@ -22,20 +24,15 @@ import com.example.jakob.foxme.Backend.ProfilSpeicherungsVerwaltung;
  * create an instance of this fragment.
  */
 public class ThirdFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    //private static final String ARG_PARAM2 = "param2";
+
+    private OnFragmentInteractionListener mListener;
+
     //jakob
-    MainActivity mainActivity = new MainActivity();
-    //private String mParam2;
-    ProfilSpeicherungsVerwaltung pSV = new ProfilSpeicherungsVerwaltung(mainActivity.refContext);
+    ProfilSpeicherungsVerwaltung a;
+
     Spinner spinner1;
     Spinner spinner2;
-    int[] zustaende=new int[2];
-    // TODO: Rename and change types of parameters
-    private int mParam1;
-    private OnFragmentInteractionListener mListener;
+    int[] zustaende={0,0};
     //jakob ende
 
     public ThirdFragment() {
@@ -46,15 +43,12 @@ public class ThirdFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
      * @return A new instance of fragment ThirdFragment.
      */
-    // TODO: Rename and change types and number of parameters
-    public static ThirdFragment newInstance(int param1) {
+    public static ThirdFragment newInstance() {
         ThirdFragment fragment = new ThirdFragment();
+
         Bundle args = new Bundle();
-        args.putInt(ARG_PARAM1, param1);
-        //args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -62,10 +56,6 @@ public class ThirdFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getInt(ARG_PARAM1);
-            //mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -75,45 +65,60 @@ public class ThirdFragment extends Fragment {
         View view=inflater.inflate(R.layout.fragment_third, container, false);
         //Jakob
 
-        //laed den zustand des profils aus dem speicher
-        String speicherGesammt=pSV.load();
-        Log.i("Thirdfragment","speicherGesammt: "+speicherGesammt);
-        String[] speicherTeile=speicherGesammt.split(" ");
-        Log.i("Thirdfragment","speicherTeile: "+speicherTeile.toString());
+        //Initalisieren des Contexts und der Verbindung zum Speicher
+        Context c=getActivity();
+        a=new ProfilSpeicherungsVerwaltung(c.getApplicationContext());
 
-        //setze den zustand des profils auf den gespeicherten Zustand
-        zustaende[0]=1;
-        zustaende[1]=2;
+        //laden aus dem speicher
+        String speicherGesammt=a.load();
+        Log.i("Thirdfragment","speicherGesammt: " + speicherGesammt);
+        String[] speicherTeile=speicherGesammt.split(" ");
+        int laenge=speicherTeile.length;
+        //ausgabe der StringTeile
+        for(int i=0;i<laenge;i++) {
+            Log.i("Thirdfragment", "speicherTeile: " + i + " : " + speicherTeile[i]);
+        }
+        //Strings zu den Zustaenden parsen
+        for(int i=0;i<laenge;i++){
+            zustaende[i]=Integer.parseInt(speicherTeile[i]);
+        }
 
         //setzt die oberfläche gemäß dem zustand
         spinner1=(Spinner) view.findViewById(R.id.spinner);
         spinner1.setSelection(zustaende[0]);
 
+
         spinner2=(Spinner) view.findViewById(R.id.spinner2);
         spinner2.setSelection(zustaende[1]);
 
-        /*
-        spinner1=(Spinner) view.findViewById(R.id.spinner2);
-        if(speicherTeile.length>0){
-            Log.i("Thirdfragment","im if 1");
-            spinner1.setSelection(Integer.parseInt(speicherTeile[0]));
-        }
-        else{
-            Log.i("Thirdfragment","nicht in if 1");
-        }
-        /*
-        /*
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                pSV.save(spinner1.getSelectedItemPosition()+" ");
+                int position=spinner1.getSelectedItemPosition();
+                Log.i("spinner 1","selected id: "+position);
+                zustaende[0]=position;
+                a.save(parse(zustaende));
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
-        */
+
+        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                int position=spinner2.getSelectedItemPosition();
+                Log.i("spinner 2","selected id: "+position);
+                zustaende[1]=position;
+                a.save(parse(zustaende));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
         //Jakob ende
         return view;
     }
@@ -157,5 +162,15 @@ public class ThirdFragment extends Fragment {
         public void onFragmentInteraction(Uri uri);
     }
 
-
+    //Jakob
+    private String parse(int[] eingabe){
+        String ausgabe="";
+        for(int i=0;i<eingabe.length-1;i++){
+            ausgabe=ausgabe+eingabe[i]+" ";
+        }
+        ausgabe=ausgabe+eingabe[eingabe.length-1];
+        Log.i("ThirdFragment","ergebnis von parse: "+ausgabe);
+        return ausgabe;
+    }
+    //
 }
