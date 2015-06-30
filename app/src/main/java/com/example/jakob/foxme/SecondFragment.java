@@ -99,7 +99,7 @@ public class SecondFragment extends Fragment {
         tagAuswahlSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if(initalerknopfDruck==true){
+                if (initalerknopfDruck) {
                     initalerknopfDruck=false;
                     Log.i("Prodozent; Spinner3 ", "initialer knopfdruck");
                 }
