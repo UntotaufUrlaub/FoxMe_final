@@ -80,28 +80,53 @@
             android:text="Tags"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <Spinner
-            android:id="@+id/spinner3"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/tag_überschrift"
-            android:drawSelectorOnTop="true"
-            android:entries="@array/tags"
-            android:spinnerMode="dropdown"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="gewählte Tags"
+            android:id="@+id/gewählte_tags"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
             />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="wählen"
+            android:id="@+id/wählen"
+            android:layout_below="@+id/gewählte_tags"
+            android:layout_alignLeft="@+id/löschen"
+            android:layout_alignStart="@+id/löschen" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="löschen"
+            android:id="@+id/löschen"
+            android:layout_below="@+id/wählen"
+            android:layout_centerHorizontal="true" />
+
         <ListView
-            android:id="@+id/ausgewaehlte_tag_liste"
             android:layout_width="wrap_content"
             android:layout_height="170dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="140dp"
-            android:dividerHeight="6dp"
-            />
+            android:id="@+id/alle_tags_Liste"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_toLeftOf="@+id/wählen"
+            android:layout_toStartOf="@+id/wählen"
+            android:layout_marginRight="10dp"/>
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="170dp"
+            android:id="@+id/ausgewaehlte_tag_liste"
+            android:layout_below="@+id/gewählte_tags"
+            android:layout_toRightOf="@+id/wählen"
+            android:layout_toEndOf="@+id/wählen"
+            android:layout_marginLeft="10dp"/>
 
     </RelativeLayout>
 
@@ -112,6 +137,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:text="abschicken" />
+
 
 </RelativeLayout>
 </ScrollView>

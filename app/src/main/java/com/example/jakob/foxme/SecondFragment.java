@@ -41,10 +41,17 @@ public class SecondFragment extends Fragment {
     ArrayAdapter tagListAdapter;
     ArrayList<String> aktiveTags = new ArrayList();
     boolean initalerknopfDruck = true;
-    //Jakob------------------------------------------------------------------
     private EditText anzeigenText;
     private EditText anzeigenAdresse;
+
+    //Jakob------------------------------------------------------------------
+    ListView alleTagsListe;
+    ArrayAdapter alleTagsListeAdapter;
+    ArrayList<String> alleTags =new ArrayList();
+
+    String auswahlAdd, auswahlRemove;
     //-----------------------------------------------------------------------
+
     //private String mParam2;
     // TODO: Rename and change types of parameters
     private int mParam1;
@@ -94,28 +101,87 @@ public class SecondFragment extends Fragment {
         tagListAdapter = new ArrayAdapter<>(getActivity(), R.layout.tag_in_liste_layout, R.id.tag_einzeln_Anzeige, aktiveTags);
         tagAnzeigeListe.setAdapter(tagListAdapter);
 
-        //dinge die im Spinner tagAuswahl angeklickt werden kommen in die Liste der activen tags und werden angezeigt
-        Spinner tagAuswahlSpinner=(Spinner) view.findViewById(R.id.spinner3);
-        tagAuswahlSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        alleTagsListe=(ListView) view.findViewById(R.id.alle_tags_Liste);
+        alleTagsListeAdapter=new ArrayAdapter(getActivity(), R.layout.tag_in_liste_layout, R.id.tag_einzeln_Anzeige,alleTags);
+        alleTagsListe.setAdapter(alleTagsListeAdapter);
+
+        //ToDo: alle möglichen Tags hinzufuegen
+        alleTags.add("Alles");
+        alleTags.add("Weiblich");
+        alleTags.add("Männlich");
+        //essgewohnheit
+        alleTags.add("Halal");
+        alleTags.add("Koscher");
+        alleTags.add("Pescetarier");
+        alleTags.add("Veganer");
+        alleTags.add("Vegetarier");
+
+        alleTags.add("Alkohol");
+        alleTags.add("Fisch");
+        alleTags.add("Kinder");
+        alleTags.add("Italienisch");
+        alleTags.add("Afrikanisch");
+        alleTags.add("Mexikanisch");
+        alleTags.add("Asiatisch");
+
+
+        tagAnzeigeListe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (initalerknopfDruck) {
-                    initalerknopfDruck=false;
-                    Log.i("Prodozent; Spinner3 ", "initialer knopfdruck");
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                TextView gewaehltesTag =(TextView) view.findViewById(R.id.tag_einzeln_Anzeige);
+                auswahlRemove = gewaehltesTag.getText().toString();
+                Log.i("SecondFragment", "die Liste der Aktiven tags wurde angeklickt; das Element: " + auswahlRemove);
+                view.setSelected(true);
+            }
+        });
+
+        alleTagsListe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                TextView gewaehltesTag = (TextView) view.findViewById(R.id.tag_einzeln_Anzeige);
+                auswahlAdd=gewaehltesTag.getText().toString();
+                Log.i("SecondFragment","die Liste aller Tags wurde angeklickt; das Element: "+auswahlAdd);
+                view.setSelected(true);
+            }
+        });
+
+        Button waehlen=(Button) view.findViewById(R.id.wählen);
+        waehlen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(auswahlAdd.equals("")){
+                    Log.i("SecondFragment","Button waehlen: hinzufuegen von nichts ");
                 }
-                else {
-                    Log.i("Prodozent; Spinner3 ", "ein tag gewaehlt");
-                    TextView gewaehltesTag = (TextView) view;
-                    Log.i("Prodozent; Spinner3 ", "gewaehltes tag:" + gewaehltesTag.getText());
-                    aktiveTags.add((String) gewaehltesTag.getText());
-                    Log.i("Prodozent; Spinner3 ", "erstes Element der aktivenTag ArrayList: " + aktiveTags.toString());
+                else{
+                    String temp=auswahlAdd;
+                    auswahlAdd="";
+                    Log.i("SecondFragment","Button waehlen: hinzufuegen von "+temp);
+                    alleTags.remove(temp);
+                    alleTagsListeAdapter.notifyDataSetChanged();
+                    aktiveTags.add(temp);
                     tagListAdapter.notifyDataSetChanged();
                 }
             }
+        });
 
+        Button loeschen=(Button) view.findViewById(R.id.löschen);
+        loeschen.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
+        public void onClick(View view){
+                if(auswahlRemove.equals("")){
+                    Log.i("SecondFragment","Button löschen: nichts wurde gelöscht");
+                }
+                else{
+                    String temp=auswahlRemove;
+                    auswahlRemove="";
+                    Log.i("SecondFragment","Button Löschen: Löschen von "+temp);
+                    aktiveTags.remove(temp);
+                    tagListAdapter.notifyDataSetChanged();
+                    alleTags.add(temp);
+                    alleTagsListeAdapter.notifyDataSetChanged();
+                }
             }
         });
         //----------------------------------------------------------------------------------------------------------------------------

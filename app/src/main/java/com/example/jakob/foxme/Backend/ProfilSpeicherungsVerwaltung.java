@@ -59,7 +59,7 @@ public class ProfilSpeicherungsVerwaltung {
         } catch (Exception e) {
             Log.i("profil speichern","catch outer exeption-----------------------------------------------------------------------------------------------------");
             e.printStackTrace();
-            ausgabe="0 0";     //standart zustand des Profils
+            ausgabe=" ; Männlich; Halal; Alkohol; Fisch;  ; Italienisch; Afrikanisch;  ; Asiatisch;  ;  ;  ";     //standart zustand des Profils
         }
         return ausgabe;
     }

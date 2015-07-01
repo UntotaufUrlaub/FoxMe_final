@@ -62,7 +62,7 @@
         android:checked="true"
         android:text="Alkohol    " />
 
-        <Switch
+    <Switch
         android:id="@+id/switch2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -84,6 +84,7 @@
         android:checked="false"
         android:text="Kinder      " />
 
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -104,11 +105,70 @@
         android:text="Essgewohnheit :"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
+        <!--Jakob-->
+        <TextView
+            android:id="@+id/textView_Vorlieben"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="                               Vorlieben"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_below="@+id/switch3"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="15dp"
+            />
+
+        <Switch
+            android:id="@+id/switch_italienisch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="false"
+            android:layout_below="@+id/textView_Vorlieben"
+            android:layout_marginTop="15dp"
+            android:checked="false"
+            android:text="Italienisch             " />
+
+        <Switch
+            android:id="@+id/switch_afrikanisch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="false"
+            android:layout_below="@+id/switch_italienisch"
+            android:layout_marginTop="15dp"
+            android:checked="true"
+            android:text="Afrikanisch           " />
+
+        <Switch
+            android:id="@+id/switch_mexikanisch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="false"
+            android:layout_below="@+id/switch_afrikanisch"
+            android:layout_marginTop="15dp"
+            android:checked="true"
+            android:text="Mexikanisch         " />
+
+        <Switch
+            android:id="@+id/switch_asiatisch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="false"
+            android:layout_below="@+id/switch_mexikanisch"
+            android:layout_marginTop="15dp"
+            android:checked="true"
+            android:text="Asiatisch               " />
+        <!--Jakob Ende-->
+
+
         <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/switch3"
+            android:layout_below="@+id/switch_asiatisch"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
             android:text="Geschäftsangaben (optional):"

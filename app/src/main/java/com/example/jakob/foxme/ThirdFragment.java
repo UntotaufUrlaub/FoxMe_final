@@ -5,12 +5,17 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Switch;
 
 import com.example.jakob.foxme.Backend.ProfilSpeicherungsVerwaltung;
 
@@ -30,9 +35,21 @@ public class ThirdFragment extends Fragment {
     //jakob
     ProfilSpeicherungsVerwaltung a;
 
+    EditText geburtsdatum;
     Spinner spinner1;
     Spinner spinner2;
-    int[] zustaende={0,0};
+    Switch alkohol;
+    Switch fisch;
+    Switch kinder;
+    Switch italienisch;
+    Switch afrikanisch;
+    Switch mexikanisch;
+    Switch asiatisch;
+    EditText firmenName;
+    EditText firmenAdresse;
+    EditText telefonNr;
+
+    String[] zustaende={" ","Männlich","Halal","Alkohol","Fisch"," ","Italienisch","Afrikanisch"," ","Asiatisch"," "," "," "};
     //jakob ende
 
     public ThirdFragment() {
@@ -72,31 +89,139 @@ public class ThirdFragment extends Fragment {
         //laden aus dem speicher
         String speicherGesammt=a.load();
         Log.i("Thirdfragment","speicherGesammt: " + speicherGesammt);
-        String[] speicherTeile=speicherGesammt.split(" ");
+        String[] speicherTeile=speicherGesammt.split("; ");
         int laenge=speicherTeile.length;
         //ausgabe der StringTeile
         for(int i=0;i<laenge;i++) {
             Log.i("Thirdfragment", "speicherTeile: " + i + " : " + speicherTeile[i]);
         }
-        //Strings zu den Zustaenden parsen
-        for(int i=0;i<laenge;i++){
-            zustaende[i]=Integer.parseInt(speicherTeile[i]);
+        Log.i("Thirdfragment", "zustaende.length: "+zustaende.length);
+        if(laenge==zustaende.length){
+            for(int i=0;i<laenge;i++){
+                zustaende[i]=speicherTeile[i];
+            }
+        }
+        else{
+            Log.i("Thirdfragment", "Länge des speichers passt nicht; länge des speichers: "+laenge+" Überschreiben des speichers; und setzt das Profil auf den standart zustand");
+            a.save(parse(zustaende));
         }
 
         //setzt die oberfläche gemäß dem zustand
+        geburtsdatum=(EditText) view.findViewById(R.id.editText3);
+        if(zustaende[0].equals(" ")){
+        }
+        else{
+            geburtsdatum.setHint(zustaende[0]);
+        }
+
         spinner1=(Spinner) view.findViewById(R.id.spinner);
-        spinner1.setSelection(zustaende[0]);
+        spinner1.setSelection(getIndex(spinner1,zustaende[1]));
 
 
         spinner2=(Spinner) view.findViewById(R.id.spinner2);
-        spinner2.setSelection(zustaende[1]);
+        spinner2.setSelection(getIndex(spinner2,zustaende[2]));
+
+        alkohol=(Switch) view.findViewById(R.id.switch1);
+        if(zustaende[3].equals("Alkohol")){
+            alkohol.setSelected(true);
+        }
+        else{
+            alkohol.setSelected(false);
+        }
+        //ab hier noch Listener
+        fisch=(Switch) view.findViewById(R.id.switch2);
+        if(zustaende[4].equals("Fisch")){
+            fisch.setSelected(true);
+        }
+        else{
+            fisch.setSelected(false);
+        }
+
+        kinder=(Switch) view.findViewById(R.id.switch3);
+        if(zustaende[5].equals("Kinder")){
+            kinder.setSelected(true);
+        }
+        else{
+            kinder.setSelected(false);
+        }
+
+        italienisch=(Switch) view.findViewById(R.id.switch_italienisch);
+        if(zustaende[6].equals("Italienisch")){
+            italienisch.setSelected(true);
+        }
+        else{
+            italienisch.setSelected(false);
+        }
+
+        afrikanisch=(Switch) view.findViewById(R.id.switch_afrikanisch);
+        if(zustaende[7].equals("Afrikanisch")){
+            afrikanisch.setSelected(true);
+        }
+        else{
+            afrikanisch.setSelected(false);
+        }
+
+        mexikanisch=(Switch) view.findViewById(R.id.switch_mexikanisch);
+        if(zustaende[8].equals("Mexikanisch")){
+            mexikanisch.setSelected(true);
+        }
+        else{
+            mexikanisch.setSelected(false);
+        }
+
+        asiatisch=(Switch) view.findViewById(R.id.switch_asiatisch);
+        if(zustaende[9].equals("Asiatisch")){
+            asiatisch.setSelected(true);
+        }
+        else{
+            asiatisch.setSelected(false);
+        }
+
+        firmenName=(EditText) view.findViewById(R.id.editText6);
+        if(zustaende[10].equals(" ")){
+        }
+        else{
+            firmenName.setHint(zustaende[10]);
+        }
+
+        firmenAdresse=(EditText) view.findViewById(R.id.editText5);
+        if(zustaende[11].equals(" ")){
+        }
+        else{
+            firmenAdresse.setHint(zustaende[11]);
+        }
+
+        telefonNr=(EditText) view.findViewById(R.id.editText4);
+        if(zustaende[12].equals(" ")){
+        }
+        else{
+            telefonNr.setHint(zustaende[12]);
+        }
+
+        //speicherung durch Listener
+        //ToDo: speichern des Geburtsdatums
+        geburtsdatum.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                zustaende[0]=geburtsdatum.getText().toString();
+                a.save(parse(zustaende));
+            }
+        });
 
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                int position=spinner1.getSelectedItemPosition();
-                Log.i("spinner 1","selected id: "+position);
-                zustaende[0]=position;
+                String selectedItem=spinner1.getSelectedItem().toString();
+                Log.i("spinner 1","selected item: "+selectedItem);
+                zustaende[1]=selectedItem;
                 a.save(parse(zustaende));
             }
 
@@ -108,9 +233,9 @@ public class ThirdFragment extends Fragment {
         spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                int position=spinner2.getSelectedItemPosition();
-                Log.i("spinner 2","selected id: "+position);
-                zustaende[1]=position;
+                String selectedItem=spinner2.getSelectedItem().toString();
+                Log.i("spinner 2","selected id: "+selectedItem);
+                zustaende[2]=selectedItem;
                 a.save(parse(zustaende));
             }
 
@@ -118,6 +243,153 @@ public class ThirdFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
+
+        alkohol.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b) {
+                    zustaende[3] = "Alkohol";
+                }
+                else{
+                    zustaende[3]= " ";
+                }
+                a.save(parse(zustaende));
+                Log.i("Alkohol","changed to:" + zustaende[3]);
+            }
+        });
+
+        fisch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b) {
+                    zustaende[4] = "Fisch";
+                }
+                else{
+                    zustaende[4]= " ";
+                }
+                a.save(parse(zustaende));
+                Log.i("Fisch","changed to:" + zustaende[4]);
+            }
+        });
+
+        kinder.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b) {
+                    zustaende[5] = "Kinder";
+                }
+                else{
+                    zustaende[5]= " ";
+                }
+                a.save(parse(zustaende));
+                Log.i("Kinder","changed to:" + zustaende[5]);
+            }
+        });
+
+        italienisch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b) {
+                    zustaende[6] = "Italienisch";
+                }
+                else{
+                    zustaende[6]= " ";
+                }
+                a.save(parse(zustaende));
+                Log.i("Italienisch","changed to:" + zustaende[6]);
+            }
+        });
+
+        afrikanisch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b) {
+                    zustaende[7] = "Afrikanisch";
+                }
+                else{
+                    zustaende[7]= " ";
+                }
+                a.save(parse(zustaende));
+                Log.i("Afrikanisch","changed to:" + zustaende[7]);
+            }
+        });
+
+        mexikanisch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b) {
+                    zustaende[8] = "Mexikanisch";
+                }
+                else{
+                    zustaende[8]= " ";
+                }
+                a.save(parse(zustaende));
+                Log.i("Mexikanisch","changed to:" + zustaende[8]);
+            }
+        });
+
+        asiatisch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b) {
+                    zustaende[9] = "Asiatisch";
+                }
+                else{
+                    zustaende[9]= " ";
+                }
+                a.save(parse(zustaende));
+                Log.i("Asiatisch","changed to:" + zustaende[9]);
+            }
+        });
+
+        firmenName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                zustaende[10]=firmenName.getText().toString();
+                a.save(parse(zustaende));
+            }
+        });
+
+        firmenAdresse.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                zustaende[11]=firmenAdresse.getText().toString();
+                a.save(parse(zustaende));
+            }
+        });
+
+        telefonNr.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                zustaende[12]=telefonNr.getText().toString();
+                a.save(parse(zustaende));
+            }
+        });
+
 
         //Jakob ende
         return view;
@@ -163,14 +435,27 @@ public class ThirdFragment extends Fragment {
     }
 
     //Jakob
-    private String parse(int[] eingabe){
+    private String parse(String[] eingabe){
         String ausgabe="";
         for(int i=0;i<eingabe.length-1;i++){
-            ausgabe=ausgabe+eingabe[i]+" ";
+            ausgabe=ausgabe+eingabe[i]+"; ";
         }
         ausgabe=ausgabe+eingabe[eingabe.length-1];
         Log.i("ThirdFragment","ergebnis von parse: "+ausgabe);
         return ausgabe;
+    }
+
+    private int getIndex(Spinner spinner,String value){
+        int index=0;
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(value)){
+                Log.i("ThirdFragment","getIndex: gefunden; "+"Item at i="+i+": "+spinner.getItemAtPosition(i).toString());
+                index = i;
+                break;
+            }
+        }
+        Log.i("ThirdFragment","getIndex; spinner erstes Item: "+spinner.getItemAtPosition(0)+" value: "+value+" index: "+index);
+        return index;
     }
     //
 }

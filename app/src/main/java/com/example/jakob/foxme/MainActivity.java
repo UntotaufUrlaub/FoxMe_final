@@ -43,7 +43,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Jakob
-        Log.i("Main Activity","compile Zustand: 4");
+        Log.i("Main Activity","compile Zustand: 23");
         //Jakob
         setContentView(R.layout.activity_main);
         mNavigationDrawerFragment = (NavigationDrawerFragment)
