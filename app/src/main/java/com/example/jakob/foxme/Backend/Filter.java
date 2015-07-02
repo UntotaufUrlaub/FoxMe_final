@@ -7,17 +7,13 @@ import java.util.List;
  * Created by Andi on 18.06.2015.
  */
 public class Filter {
-    public ArrayList<String> localTag = new ArrayList();
+    //public ArrayList<String> localTag = new ArrayList();
+    ProfilSpeicherungsVerwaltung profilSpeicherungsVerwaltung;
 
-
-    public void setLocalTag(ArrayList<String> localTag) {//TODO: change from standard set to setfromprofilefile
-        this.localTag = localTag;
-    }
-
-    public ArrayList<Anzeige> filterit(List<Anzeige> ungefilterteListe, Boolean filterbool) {
+    public ArrayList<Anzeige> filterit(List<Anzeige> ungefilterteListe, ArrayList<String> localTag, Boolean filterbool) {
         if (filterbool) {
-        localTag.add("Veganer");
-        AnzeigenServiceImpl anzeigenService = new AnzeigenServiceImpl();
+
+            AnzeigenServiceImpl anzeigenService = new AnzeigenServiceImpl();
         ArrayList<Anzeige> returnList = new ArrayList();              //legt eine leer Liste an, in die die passenden Anzeigen geschrieben werden
         Anzeige anzeige;
         ArrayList<String> anzeigenTagListe;

@@ -39,12 +39,16 @@ public class RevieverTask extends AsyncTask<String[], Void, Boolean> {
     private Statement statement = null;
     private ResultSet resultSet = null;
     private Context context;
+    private String StringLocalTag;
+    private ArrayList<String> ListLocalTags;
 
-    public RevieverTask(FragmentActivity activity, String filterbool) {
+
+    public RevieverTask(FragmentActivity activity, String filterbool, String abcd) {
         filter = filterbool;
         this.activity = activity;
         context = activity;
         dialog = new ProgressDialog(context);
+        StringLocalTag = abcd;
     }
 
     protected void onPreExecute() {
@@ -72,6 +76,8 @@ public class RevieverTask extends AsyncTask<String[], Void, Boolean> {
 
     protected Boolean doInBackground(final String[]... params) {
         Filter gefiltert = new Filter();
+        AnzeigenServiceImpl anzeigenService = new AnzeigenServiceImpl();
+        ListLocalTags = anzeigenService.stringToTagList(StringLocalTag);
         try {
             Class.forName("com.mysql.jdbc.Driver");            // This will load the MySQL driver, each DB has its own driver
             connect = DriverManager.getConnection("jdbc:mysql://sql5.freemysqlhosting.net/sql579051?" + "user=sql579051&password=zY7!kX3%");          // Setup the connection with the DB
@@ -94,7 +100,7 @@ public class RevieverTask extends AsyncTask<String[], Void, Boolean> {
                     i++;
                     liste123.add(anzeige);
                     if (filter.equals("true")) {
-                        liste123 = gefiltert.filterit(liste123, Boolean.TRUE);
+                        liste123 = gefiltert.filterit(liste123, ListLocalTags, Boolean.TRUE);
                     }
                 } catch (Exception e) {
                     Log.i("---Select-push-excep :", "abgeschmiert?");

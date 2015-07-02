@@ -1,6 +1,7 @@
 package com.example.jakob.foxme;
 
 import android.app.Activity;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import android.widget.ListView;
 import android.widget.Switch;
 
 import com.example.jakob.foxme.Backend.AnzeigenServiceImpl;
+import com.example.jakob.foxme.Backend.ProfilSpeicherungsVerwaltung;
 import com.example.jakob.foxme.Backend.RevieverTask;
 
 import java.util.ArrayList;
@@ -36,8 +38,9 @@ public class FirstFragment extends Fragment {
     ArrayAdapter konsumentArrayAdapter;
     ArrayList<String> konsumentListeInfoTexte=new ArrayList();
     AnzeigenServiceImpl anzeigenService = new AnzeigenServiceImpl();
+    ProfilSpeicherungsVerwaltung a;
     private OnFragmentInteractionListener mListener;
-
+    private String localTags;
     public FirstFragment() {
         // Required empty public constructor
     }
@@ -68,6 +71,10 @@ public class FirstFragment extends Fragment {
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
+        //Initalisieren des Contexts und der Verbindung zum Speicher
+        Context c = getActivity();
+        a = new ProfilSpeicherungsVerwaltung(c.getApplicationContext());
+        localTags = a.load();
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_konsument, container, false);
         konsumentListView = (ListView) view.findViewById(R.id.konsument_list_view);
@@ -76,7 +83,7 @@ public class FirstFragment extends Fragment {
         final Button button_erneuern = (Button) view.findViewById(R.id.button_konsument_fetchit);
         button_erneuern.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                RevieverTask testklasse = new RevieverTask(getActivity(), filterbool);
+                RevieverTask testklasse = new RevieverTask(getActivity(), filterbool, localTags);
                 testklasse.execute();
             }
         });

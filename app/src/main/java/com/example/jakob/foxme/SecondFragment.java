@@ -13,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.jakob.foxme.Backend.AnzeigenServiceImpl;
@@ -41,22 +40,19 @@ public class SecondFragment extends Fragment {
     ArrayAdapter tagListAdapter;
     ArrayList<String> aktiveTags = new ArrayList();
     boolean initalerknopfDruck = true;
-    private EditText anzeigenText;
-    private EditText anzeigenAdresse;
-
     //Jakob------------------------------------------------------------------
     ListView alleTagsListe;
     ArrayAdapter alleTagsListeAdapter;
     ArrayList<String> alleTags =new ArrayList();
-
-    String auswahlAdd, auswahlRemove;
+    String auswahlRemove = "";
+    String auswahlAdd = "";
+    private EditText anzeigenText;
     //-----------------------------------------------------------------------
-
+    private EditText anzeigenAdresse;
     //private String mParam2;
     // TODO: Rename and change types of parameters
     private int mParam1;
     private OnFragmentInteractionListener mListener;
-
 
     public SecondFragment() {
         // Required empty public constructor
